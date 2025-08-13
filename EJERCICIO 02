@@ -1,0 +1,63 @@
+import numpy as np
+
+def crear_matriz(nombre):
+    filas = int(input(f"Filas de la matriz {nombre}: "))
+    columnas = int(input(f"Columnas de la matriz {nombre}: "))
+    matriz = []
+    for f in range(filas):
+        fila = []
+        for c in range(columnas):
+            valor = float(input(f"Elemento [{f+1},{c+1}]: "))
+            fila.append(valor)
+        matriz.append(fila)
+    return np.array(matriz)
+
+def menu():
+    print("\n=== CALCULADORA DE MATRICES ===")
+    print("1) Suma")
+    print("2) Resta")
+    print("3) Multiplicación")
+    print("4) Transpuesta")
+    print("5) Salir")
+
+opcion = ""
+while opcion != "5":
+    menu()
+    opcion = input("Elige una opción: ")
+
+    if opcion == "1":
+        print("\n--- SUMA ---")
+        A = crear_matriz("A")
+        B = crear_matriz("B")
+        if A.shape == B.shape:
+            print("Resultado:\n", np.add(A, B))
+        else:
+            print("Error: Las dimensiones no coinciden.")
+
+    elif opcion == "2":
+        print("\n--- RESTA ---")
+        A = crear_matriz("A")
+        B = crear_matriz("B")
+        if A.shape == B.shape:
+            print("Resultado:\n", np.subtract(A, B))
+        else:
+            print("Error: Las dimensiones no coinciden.")
+
+    elif opcion == "3":
+        print("\n--- MULTIPLICACIÓN ---")
+        A = crear_matriz("A")
+        B = crear_matriz("B")
+        if A.shape[1] == B.shape[0]:
+            print("Resultado:\n", np.dot(A, B))
+        else:
+            print("Error: Columnas de A deben ser iguales a filas de B.")
+
+    elif opcion == "4":
+        print("\n--- TRANSPUESTA ---")
+        A = crear_matriz("A")
+        print("Matriz transpuesta:\n", np.transpose(A))
+
+    elif opcion == "5":
+        print("Adiós.")
+    else:
+        print("Opción inválida.")
